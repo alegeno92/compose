@@ -1,0 +1,29 @@
+version: '3'
+services:
+  web:
+    image: runtime-server:latest
+    ports:
+      - "8000:8000"
+      - "8086:8086"
+    links:
+      - mosquitto
+
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    hostname: mosquitto
+    container_name: mosquitto
+    expose:
+      - "1883"
+      - "9001"
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./configurations/mosquitto:/mosquitto/config/
+
+  cloud_connector:
+    image: cloud-connector:latest
+    hostname: cloudconnector
+    links: 
+      - mosquitto
+    volumes:
+      - ./configurations/cloud-connector/:/config
