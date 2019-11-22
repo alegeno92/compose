@@ -1,12 +1,23 @@
 version: '3'
 services:
-  web:
-    image: runtime-server:latest
+  server:
+    image: alegeno92/server:latest
     ports:
       - "8000:8000"
       - "8086:8086"
-    links:
-      - mosquitto
+    depends_on:
+      - "mosquitto"
+      - "people-counter"
+    volumes:
+      - ./configurations/server:/config/
+
+  agent:
+    image: alegeno92/agent:latest
+    hostname: agent
+    depends_on:
+      - "mosquitto"
+    volumes:
+      - ./configurations/agent:/config/
 
   mosquitto:
     image: eclipse-mosquitto:latest
@@ -20,10 +31,28 @@ services:
     volumes:
       - ./configurations/mosquitto:/mosquitto/config/
 
-  cloud_connector:
-    image: cloud-connector:latest
+
+  cloud-connector:
+    image: alegeno92/cloud-connector:latest
     hostname: cloudconnector
-    links: 
-      - mosquitto
+    depends_on:
+      - "mosquitto"
     volumes:
       - ./configurations/cloud-connector/:/config
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  people-counter:
+    image: alegeno92/people-counter:latest
+    depends_on:
+      - "mosquitto"
+    expose:
+      - "8084"
+    ports:
+      - "8084:8084"
+    volumes:
+      - ./configurations/people-counter/:/config
+    environment:
+      - PYTHONUNBUFFERED=1
+
+

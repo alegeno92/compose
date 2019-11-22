@@ -1,0 +1,29 @@
+{
+  "AIO": {
+    "username": "",
+    "key": ""
+  },
+  "local": {
+    "host": "mosquitto",
+    "port": 1883,
+    "client_id": "cloud-connector"
+  },
+  "feeds": [
+    {
+      "topic": "loads",
+      "data": "value"
+    },
+    {
+      "topic": "memory",
+      "data": "value"
+    },
+    {
+      "topic": "people",
+      "data": "value"
+    },
+    {
+      "topic": "storage",
+      "data": "value"
+    }
+  ]
+}

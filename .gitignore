@@ -1,1 +1,3 @@
-/configurations
+/configurations/agent/config.json
+/configurations/cloud-connector/config.json
+
