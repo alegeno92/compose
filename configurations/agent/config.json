@@ -1,0 +1,41 @@
+{
+  "mqtt_client": {
+    "enabled": true,
+    "client_id": "agent",
+    "host": "tcp://mosquitto:1883"
+  },
+  "redis_client": {
+    "username": "agent",
+    "password": "secret",
+    "host": "localhost",
+    "port": 1831
+  },
+  "sensors": [
+    {
+      "id": "1",
+      "name": "load",
+      "type": "load",
+      "model": "load",
+      "unit": "%",
+      "interval": 5,
+      "mqtt": {
+        "publish_to": "loads",
+        "resend_equal": true,
+        "save_on_connection_fallback": true
+      }
+    },
+    {
+      "id": "3",
+      "name": "memory",
+      "type": "size",
+      "model": "memory",
+      "unit": "MB",
+      "interval": 6,
+      "mqtt": {
+        "publish_to": "memory",
+        "resend_equal": true,
+        "save_on_connection_fallback": true
+      }
+    }
+  ]
+}
