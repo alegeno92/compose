@@ -1,8 +1,9 @@
 {
   "AIO": {
-    "username": "alegeno92",
-    "key": "c34ab8f6e5b6493b946682a810650628"
+    "username": "",
+    "key": ""
   },
+  "mock_client":false,
   "local": {
     "host": "mosquitto",
     "port": 1883,
